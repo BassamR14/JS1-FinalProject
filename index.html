@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ankademin Quiz</title>
+    <script src="index.js" defer></script>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@300;400;500&family=Source+Sans+3:wght@400;600&display=swap"
+      rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=dark_mode" />
+  </head>
+  <body>
+    <h1>Ankademin Quiz</h1>
+    <section class="introduction">
+      <label>
+        Enter your name:
+        <input
+          type="text"
+          name="name"
+          id="name"
+          placeholder="Enter your name" />
+      </label>
+      <button class="submit-name">Submit</button>
+    </section>
+    <button class="toggle">
+      <span class="material-symbols-outlined"> dark_mode </span>
+    </button>
+
+    <section class="question">
+      <h2>Question 1</h2>
+      <p>Cats can’t taste sweetness?</p>
+      <label>
+        <input
+          type="radio"
+          name="question1"
+          id="question1-true"
+          value="correct" />
+        True
+      </label>
+      <label>
+        <input
+          type="radio"
+          name="question1"
+          id="question1-false"
+          value="wrong" />
+        False
+      </label>
+    </section>
+
+    <section class="question">
+      <h2>Question 2</h2>
+      <p>All cats are completely nocturnal?</p>
+      <label>
+        <input
+          type="radio"
+          name="question2"
+          id="question2-true"
+          value="wrong" />
+        True
+      </label>
+      <label>
+        <input
+          type="radio"
+          name="question2"
+          id="question2-false"
+          value="correct" />
+        False
+      </label>
+    </section>
+
+    <section class="question">
+      <h2>Question 3</h2>
+      <p>Which breed is known for being hairless?</p>
+
+      <label>
+        <input type="radio" name="question3" id="question3-A" value="wrong" />
+        Maine Coon
+      </label>
+
+      <label>
+        <input type="radio" name="question3" id="question3-B" value="correct" />
+        Sphynx
+      </label>
+
+      <label>
+        <input type="radio" name="question3" id="question3-C" value="wrong" />
+        Persian
+      </label>
+
+      <label>
+        <input type="radio" name="question3" id="question3-D" value="wrong" />
+        Bengal
+      </label>
+    </section>
+
+    <section class="question">
+      <h2>Question 4</h2>
+      <p>What is the average lifespan of an indoor cat?</p>
+
+      <label>
+        <input type="radio" name="question4" id="question4-A" value="wrong" />
+        3–5 years
+      </label>
+
+      <label>
+        <input type="radio" name="question4" id="question4-B" value="wrong" />
+        6–8 years
+      </label>
+
+      <label>
+        <input type="radio" name="question4" id="question4-C" value="correct" />
+        12–15 years
+      </label>
+
+      <label>
+        <input type="radio" name="question4" id="question4-D" value="wrong" />
+        20–25 years
+      </label>
+    </section>
+
+    <section class="question">
+      <h2>Question 5</h2>
+      <p>What is a group of kittens called?</p>
+
+      <label>
+        <input type="radio" name="question5" id="question5-A" value="correct" />
+        A litter
+      </label>
+
+      <label>
+        <input type="radio" name="question5" id="question5-B" value="wrong" /> A
+        pack
+      </label>
+
+      <label>
+        <input type="radio" name="question5" id="question5-C" value="wrong" /> A
+        flock
+      </label>
+
+      <label>
+        <input type="radio" name="question5" id="question5-D" value="wrong" /> A
+        pride
+      </label>
+    </section>
+
+    <section class="question">
+      <h2>Question 6</h2>
+      <p>What do cats primarily use their whiskers for?</p>
+
+      <label>
+        <input type="radio" name="question6" id="question6-A" value="wrong" />
+        Tasting food
+      </label>
+
+      <label>
+        <input type="radio" name="question6" id="question6-B" value="correct" />
+        Balance and sensing environment
+      </label>
+
+      <label>
+        <input type="radio" name="question6" id="question6-C" value="wrong" />
+        Hearing better
+      </label>
+
+      <label>
+        <input type="radio" name="question6" id="question6-D" value="wrong" />
+        Sleeping better
+      </label>
+    </section>
+
+    <section class="question">
+      <h2>Question 7</h2>
+      <p>Which of the following are common cat vocalizations? (Select 1–2)</p>
+
+      <label>
+        <input
+          type="checkbox"
+          name="question7"
+          id="question7-A"
+          value="correct" />
+        Meow
+      </label>
+      <label>
+        <input
+          type="checkbox"
+          name="question7"
+          id="question7-B"
+          value="wrong" />
+        Roar
+      </label>
+      <label>
+        <input
+          type="checkbox"
+          name="question7"
+          id="question7-C"
+          value="correct" />
+        Purr
+      </label>
+      <label>
+        <input
+          type="checkbox"
+          name="question7"
+          id="question7-D"
+          value="wrong" />
+        Chirp
+      </label>
+    </section>
+
+    <section class="question">
+      <h2>Question 8</h2>
+      <p>What do cats commonly do to show affection? (Select 1–2)</p>
+
+      <label>
+        <input
+          type="checkbox"
+          name="question8"
+          id="question8-A"
+          value="correct" />
+        Head-butting
+      </label>
+      <label>
+        <input
+          type="checkbox"
+          name="question8"
+          id="question8-B"
+          value="wrong" />
+        Hissing
+      </label>
+      <label>
+        <input
+          type="checkbox"
+          name="question8"
+          id="question8-C"
+          value="correct" />
+        Kneading
+      </label>
+      <label>
+        <input
+          type="checkbox"
+          name="question8"
+          id="question8-D"
+          value="wrong" />
+        Puffing up fur
+      </label>
+    </section>
+
+    <section class="question">
+      <h2>Question 9</h2>
+      <p>Which foods are safe for cats in small amounts? (Select 1–2)</p>
+
+      <label>
+        <input
+          type="checkbox"
+          name="question9"
+          id="question9-A"
+          value="correct" />
+        Plain cooked chicken
+      </label>
+      <label>
+        <input
+          type="checkbox"
+          name="question9"
+          id="question9-B"
+          value="wrong" />
+        Chocolate
+      </label>
+      <label>
+        <input
+          type="checkbox"
+          name="question9"
+          id="question9-C"
+          value="wrong" />
+        Grapes
+      </label>
+      <label>
+        <input
+          type="checkbox"
+          name="question9"
+          id="question9-D"
+          value="correct" />
+        Cooked fish (boneless)
+      </label>
+    </section>
+
+    <section class="question">
+      <h2>Question 10</h2>
+      <p>Which senses are highly developed in cats? (Select 1–2)</p>
+
+      <label>
+        <input
+          type="checkbox"
+          name="question10"
+          id="question10-A"
+          value="correct" />
+        Vision
+      </label>
+      <label>
+        <input
+          type="checkbox"
+          name="question10"
+          id="question10-B"
+          value="wrong" />
+        Smell
+      </label>
+      <label>
+        <input
+          type="checkbox"
+          name="question10"
+          id="question10-C"
+          value="wrong" />
+        Taste
+      </label>
+      <label>
+        <input
+          type="checkbox"
+          name="question10"
+          id="question10-D"
+          value="correct" />
+        Touch
+      </label>
+    </section>
+    <button class="submit">Submit</button>
+  </body>
+</html>

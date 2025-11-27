@@ -1,0 +1,108 @@
+:root {
+  --dark-color: #2e2e2e;
+  --white: white;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.introduction {
+  margin-bottom: 10px;
+}
+
+#name {
+  padding: 7px;
+}
+
+.question {
+  width: 80%;
+  border: 1px solid var(--dark-color);
+  border-radius: 15px;
+  padding: 10px;
+}
+
+.question.white-border {
+  border: 1px solid var(--white);
+}
+
+h2 {
+  margin-top: 0;
+}
+
+h1,
+h2 {
+  font-family: Poppins, sans-serif;
+}
+
+p {
+  font-family: Inter, sans-serif;
+  font-size: 1.1rem;
+}
+
+label {
+  font-family: "Source Sans 3", sans-serif;
+  font-size: 1.1rem;
+}
+
+.toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 10px;
+  background-color: var(--dark-color);
+  border-radius: 15px;
+}
+
+.material-symbols-outlined {
+  color: var(--white);
+}
+
+.dark-mode {
+  color: var(--white);
+  background-color: var(--dark-color);
+}
+
+.submit.light-mode {
+  color: var(--dark-color);
+  background-color: var(--white);
+}
+
+.submit-name.light-mode {
+  color: var(--dark-color);
+  background-color: var(--white);
+}
+
+.toggle.light-mode {
+  background-color: var(--white);
+}
+
+.material-symbols-outlined.light-mode {
+  color: var(--dark-color);
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.submit-name {
+  padding: 5px 10px;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-family: "Source Sans 3", sans-serif;
+  background-color: #2a2a2a;
+  color: var(--white);
+}
+
+.submit {
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-family: "Source Sans 3", sans-serif;
+  background-color: var(--dark-color);
+  color: var(--white);
+}
