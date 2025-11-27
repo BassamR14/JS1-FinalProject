@@ -30,12 +30,13 @@ body {
   border: 1px solid var(--white);
 }
 
-h2 {
+h3 {
   margin-top: 0;
 }
 
 h1,
-h2 {
+h2,
+h3 {
   font-family: Poppins, sans-serif;
 }
 
@@ -62,6 +63,24 @@ label {
   color: var(--white);
 }
 
+.tooltiptext {
+  visibility: hidden;
+  background-color: var(--dark-color);
+  color: var(--white);
+  width: max-content;
+  text-align: center;
+  padding: 5px;
+  border-radius: 5px;
+  position: absolute;
+  top: 20%;
+  right: 110%;
+  z-index: 1;
+}
+
+.toggle:hover .tooltiptext {
+  visibility: visible;
+}
+
 .dark-mode {
   color: var(--white);
   background-color: var(--dark-color);
@@ -83,6 +102,11 @@ label {
 
 .material-symbols-outlined.light-mode {
   color: var(--dark-color);
+}
+
+.tooltiptext.light-mode {
+  color: var(--dark-color);
+  background-color: var(--white);
 }
 
 button:hover {
