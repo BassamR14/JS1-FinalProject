@@ -48,6 +48,60 @@ function togglePage() {
 toggleBtn.addEventListener("click", togglePage);
 
 //
+// Check if all inputs are filled
+
+function checkInputs() {
+  const q1Input = document.querySelector("[name=question1]:checked");
+  const q2Input = document.querySelector("[name=question2]:checked");
+  const q3Input = document.querySelector("[name=question3]:checked");
+  const q4Input = document.querySelector("[name=question4]:checked");
+  const q5Input = document.querySelector("[name=question5]:checked");
+  const q6Input = document.querySelector("[name=question6]:checked");
+  const q7Input = Array.from(
+    document.querySelectorAll("[name=question7]:checked")
+  );
+  const q8Input = Array.from(
+    document.querySelectorAll("[name=question8]:checked")
+  );
+  const q9Input = Array.from(
+    document.querySelectorAll("[name=question9]:checked")
+  );
+  const q10Input = Array.from(
+    document.querySelectorAll("[name=question10]:checked")
+  );
+
+  //checks if radio inputs are null, if checkbox length is 0
+  if (
+    !q1Input ||
+    !q2Input ||
+    !q3Input ||
+    !q4Input ||
+    !q5Input ||
+    !q6Input ||
+    q7Input.length === 0 ||
+    q8Input.length === 0 ||
+    q9Input.length === 0 ||
+    q10Input.length === 0
+  ) {
+    alert("Answer all questions please.");
+    return false;
+  }
+
+  //
+  if (
+    q7Input.length > 2 ||
+    q8Input.length > 2 ||
+    q9Input.length > 2 ||
+    q10Input.length > 2
+  ) {
+    alert("Max 2 choices");
+    return false;
+  }
+
+  return true;
+}
+
+//
 // Radio buttons
 
 let correctAnswers = 0;
@@ -60,22 +114,17 @@ function checkRadioAnswers() {
   const q5Input = document.querySelector("[name=question5]:checked");
   const q6Input = document.querySelector("[name=question6]:checked");
 
-  if (!q1Input || !q2Input || !q3Input || !q4Input || !q5Input || !q6Input) {
-    alert("Answer all the questions please.");
-    return;
-  } else {
-    const radioArray = [q1Input, q2Input, q3Input, q4Input, q5Input, q6Input];
+  const radioArray = [q1Input, q2Input, q3Input, q4Input, q5Input, q6Input];
 
-    //returns how many correct answers(points) the user has gotten
-    radioArray.forEach((input) => {
-      if (input.value === "correct") {
-        correctAnswers += 1;
-        input.closest(".question").style.backgroundColor = "green";
-      } else {
-        input.closest(".question").style.backgroundColor = "red";
-      }
-    });
-  }
+  //returns how many correct answers(points) the user has gotten
+  radioArray.forEach((input) => {
+    if (input.value === "correct") {
+      correctAnswers += 1;
+      input.closest(".question").style.backgroundColor = "green";
+    } else {
+      input.closest(".question").style.backgroundColor = "red";
+    }
+  });
 }
 
 //
@@ -96,58 +145,35 @@ function checkCheckboxAnswers() {
     document.querySelectorAll("[name=question10]:checked")
   );
 
-  //to check that the user has picked at least one checkbox
-  if (
-    q7Input.length === 0 ||
-    q8Input.length === 0 ||
-    q9Input.length === 0 ||
-    q10Input.length === 0
-  ) {
-    alert("Answer all questions please.");
-    console.log(q7Input);
-    return;
-  } else {
-    // to check that the hasn't picked more than 2 checkboxes
-    if (
-      q7Input.length > 2 ||
-      q8Input.length > 2 ||
-      q9Input.length > 2 ||
-      q10Input.length > 2
-    ) {
-      alert("Max 2 choices");
-      return;
+  //so if they picked 1 or 2
+  const checkboxArray = [q7Input, q8Input, q9Input, q10Input];
+
+  //returns how many correct answers the user got i.e. returns points.
+  checkboxArray.forEach((input) => {
+    //this wouldn't work if the user picked 1 correct and 1 wrong.
+    // if (input.some((answer) => answer.value === "correct")) {
+    //   console.log(input);
+    //   correctAnswers += 1;
+    // }
+
+    //find out how many correct answers were selected
+    const correctSelected = input.filter(
+      (answer) => answer.value === "correct"
+    ).length;
+
+    //find out how many wrong answers were selected
+    const wrongSelected = input.filter(
+      (answer) => answer.value === "wrong"
+    ).length;
+
+    //to get a point
+    if (wrongSelected === 0 && correctSelected > 0 && input.length <= 2) {
+      correctAnswers += 1;
+      input[0].closest(".question").style.backgroundColor = "green";
     } else {
-      //so if they picked 1 or 2
-      const checkboxArray = [q7Input, q8Input, q9Input, q10Input];
-
-      //returns how many correct answers the user got i.e. returns points.
-      checkboxArray.forEach((input) => {
-        //this wouldn't work if the user picked 1 correct and 1 wrong.
-        // if (input.some((answer) => answer.value === "correct")) {
-        //   console.log(input);
-        //   correctAnswers += 1;
-        // }
-
-        //find out how many correct answers were selected
-        const correctSelected = input.filter(
-          (answer) => answer.value === "correct"
-        ).length;
-
-        //find out how many wrong answers were selected
-        const wrongSelected = input.filter(
-          (answer) => answer.value === "wrong"
-        ).length;
-
-        //to get a point
-        if (wrongSelected === 0 && correctSelected > 0) {
-          correctAnswers += 1;
-          input[0].closest(".question").style.backgroundColor = "green";
-        } else {
-          input[0].closest(".question").style.backgroundColor = "red";
-        }
-      });
+      input[0].closest(".question").style.backgroundColor = "red";
     }
-  }
+  });
 }
 
 //
@@ -158,6 +184,11 @@ const submitBtn = document.querySelector(".submit");
 submitBtn.addEventListener("click", () => {
   //clear correct answers.
   correctAnswers = 0;
+
+  //to make sure all inputs are filled then run the other functions.
+  if (!checkInputs()) {
+    return;
+  }
 
   checkRadioAnswers();
   checkCheckboxAnswers();
