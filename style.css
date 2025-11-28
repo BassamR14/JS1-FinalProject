@@ -63,7 +63,7 @@ label {
   color: var(--white);
 }
 
-.tooltiptext {
+.tooltip-text {
   visibility: hidden;
   background-color: var(--dark-color);
   color: var(--white);
@@ -77,7 +77,7 @@ label {
   z-index: 1;
 }
 
-.toggle:hover .tooltiptext {
+.toggle:hover .tooltip-text {
   visibility: visible;
 }
 
@@ -104,7 +104,7 @@ label {
   color: var(--dark-color);
 }
 
-.tooltiptext.light-mode {
+.tooltip-text.light-mode {
   color: var(--dark-color);
   background-color: var(--white);
 }
