@@ -66,19 +66,13 @@ function checkRadioAnswers() {
   } else {
     const radioArray = [q1Input, q2Input, q3Input, q4Input, q5Input, q6Input];
 
-    const radioValue = [
-      q1Input.value,
-      q2Input.value,
-      q3Input.value,
-      q4Input.value,
-      q5Input.value,
-      q6Input.value,
-    ];
-
     //returns how many correct answers(points) the user has gotten
-    radioValue.forEach((answer) => {
-      if (answer === "correct") {
+    radioArray.forEach((input) => {
+      if (input.value === "correct") {
         correctAnswers += 1;
+        input.closest(".question").style.backgroundColor = "green";
+      } else {
+        input.closest(".question").style.backgroundColor = "red";
       }
     });
   }
@@ -147,6 +141,9 @@ function checkCheckboxAnswers() {
         //to get a point
         if (wrongSelected === 0 && correctSelected > 0) {
           correctAnswers += 1;
+          input[0].closest(".question").style.backgroundColor = "green";
+        } else {
+          input[0].closest(".question").style.backgroundColor = "red";
         }
       });
     }
