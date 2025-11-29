@@ -70,7 +70,7 @@ function checkInputs() {
     document.querySelectorAll("[name=question10]:checked")
   );
 
-  //checks if radio inputs are null, if checkbox length is 0
+  //checks if radio inputs are null, if checkbox length is 0, i.e. if nothing was selected
   if (
     !q1Input ||
     !q2Input ||
@@ -165,7 +165,7 @@ function checkCheckboxAnswers() {
       (answer) => answer.value === "wrong"
     ).length;
 
-    //to get a point + shows correct/wrong answers
+    //to get a point + show correct/wrong answers
     if (wrongSelected === 0 && correctSelected > 0 && input.length <= 2) {
       correctAnswers += 1;
       input[0].closest(".question").style.backgroundColor = "#28a745";
@@ -184,14 +184,17 @@ function showResult() {
   let para = document.createElement("p");
 
   if (correctAnswers < 5) {
-    para.innerHTML = `${nameInput.value}, your score is ${correctAnswers}/10. You have brought shame to your family. `;
-    para.style.color = "red";
+    para.innerHTML = `Score: ${correctAnswers}/10. You have brought shame to your family. `;
+    // para.style.color = "red";
+    div.style.backgroundColor = "#dc3545";
   } else if (correctAnswers > 4 && correctAnswers < 8) {
-    para.innerHTML = `${nameInput.value}, your score is ${correctAnswers}/10. You have done well enough. `;
-    para.style.color = "orange";
+    para.innerHTML = `Score: ${correctAnswers}/10. You have done well enough. `;
+    // para.style.color = "orange";
+    div.style.backgroundColor = "orange";
   } else {
-    para.innerHTML = `${nameInput.value}, your score is ${correctAnswers}/10. You have pleased the gods. `;
-    para.style.color = "green";
+    para.innerHTML = `Score: ${correctAnswers}/10. You have pleased the gods. `;
+    // para.style.color = "green";
+    div.style.backgroundColor = "#28a745";
   }
 
   body.append(div);

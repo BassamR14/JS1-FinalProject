@@ -123,9 +123,9 @@ button:hover {
 }
 
 .submit {
-  padding: 10px;
+  padding: 20px;
   border-radius: 10px;
-  font-size: 1.1rem;
+  font-size: 1.4rem;
   font-family: "Source Sans 3", sans-serif;
   background-color: var(--dark-color);
   color: var(--white);
