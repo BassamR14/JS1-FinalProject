@@ -87,7 +87,7 @@ function checkInputs() {
     return false;
   }
 
-  //
+  // checks if more than 2 boxes were checked
   if (
     q7Input.length > 2 ||
     q8Input.length > 2 ||
@@ -116,13 +116,13 @@ function checkRadioAnswers() {
 
   const radioArray = [q1Input, q2Input, q3Input, q4Input, q5Input, q6Input];
 
-  //returns how many correct answers(points) the user has gotten
+  //returns how many correct answers(points) the user has gotten + shows correct/wrong answers
   radioArray.forEach((input) => {
     if (input.value === "correct") {
       correctAnswers += 1;
-      input.closest(".question").style.backgroundColor = "green";
+      input.closest(".question").style.backgroundColor = "#28a745";
     } else {
-      input.closest(".question").style.backgroundColor = "red";
+      input.closest(".question").style.backgroundColor = "#dc3545";
     }
   });
 }
@@ -131,7 +131,7 @@ function checkRadioAnswers() {
 //Checkboxes
 
 function checkCheckboxAnswers() {
-  //turned into arrays so some() could be used.
+  //turned into arrays so some()/filter() could be used.
   const q7Input = Array.from(
     document.querySelectorAll("[name=question7]:checked")
   );
@@ -145,7 +145,6 @@ function checkCheckboxAnswers() {
     document.querySelectorAll("[name=question10]:checked")
   );
 
-  //so if they picked 1 or 2
   const checkboxArray = [q7Input, q8Input, q9Input, q10Input];
 
   //returns how many correct answers the user got i.e. returns points.
@@ -166,14 +165,37 @@ function checkCheckboxAnswers() {
       (answer) => answer.value === "wrong"
     ).length;
 
-    //to get a point
+    //to get a point + shows correct/wrong answers
     if (wrongSelected === 0 && correctSelected > 0 && input.length <= 2) {
       correctAnswers += 1;
-      input[0].closest(".question").style.backgroundColor = "green";
+      input[0].closest(".question").style.backgroundColor = "#28a745";
     } else {
-      input[0].closest(".question").style.backgroundColor = "red";
+      input[0].closest(".question").style.backgroundColor = "#dc3545";
     }
   });
+}
+
+//
+// Result Message
+
+function showResult() {
+  let div = document.createElement("div");
+  div.classList.add("result");
+  let para = document.createElement("p");
+
+  if (correctAnswers < 5) {
+    para.innerHTML = `${nameInput.value}, your score is ${correctAnswers}/10. You have brought shame to your family. `;
+    para.style.color = "red";
+  } else if (correctAnswers > 4 && correctAnswers < 8) {
+    para.innerHTML = `${nameInput.value}, your score is ${correctAnswers}/10. You have done well enough. `;
+    para.style.color = "orange";
+  } else {
+    para.innerHTML = `${nameInput.value}, your score is ${correctAnswers}/10. You have pleased the gods. `;
+    para.style.color = "green";
+  }
+
+  body.append(div);
+  div.append(para);
 }
 
 //
@@ -193,4 +215,5 @@ submitBtn.addEventListener("click", () => {
   checkRadioAnswers();
   checkCheckboxAnswers();
   console.log(correctAnswers);
+  showResult();
 });

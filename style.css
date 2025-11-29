@@ -130,3 +130,20 @@ button:hover {
   background-color: var(--dark-color);
   color: var(--white);
 }
+
+.result {
+  border: 1px solid var(--dark-color);
+  background-color: var(--dark-color);
+  padding: 10px;
+  border-radius: 15px;
+}
+
+.result p {
+  font-size: 1.5rem;
+}
+
+input[type="radio"]:hover,
+input[type="checkbox"]:hover,
+label:hover {
+  cursor: pointer;
+}
