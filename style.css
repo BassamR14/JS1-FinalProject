@@ -66,7 +66,11 @@ label {
   border-radius: 15px;
 }
 
-.material-symbols-outlined.dark-mode {
+.dm-icon {
+  color: var(--white);
+}
+
+.af-icon {
   color: var(--white);
 }
 
@@ -128,7 +132,6 @@ label {
 }
 
 .next-page.light-mode {
-  color: var(--dark-color);
   background-color: var(--white);
 }
 

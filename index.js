@@ -3,7 +3,7 @@ const nameInput = document.querySelector("#name");
 const nameBtn = document.querySelector(".submit-name");
 const introLabel = document.querySelector(".intro-label");
 const intro = document.querySelector(".introduction");
-const nxtBtn = document.querySelector(".next-page");
+const nxtBtn = document.querySelectorAll(".next-page");
 
 function welcomeMessage() {
   const name = nameInput.value;
@@ -20,7 +20,8 @@ nameBtn.addEventListener("click", welcomeMessage);
 //
 // Toggle button changes style of page - dark mode -light mode
 const toggleBtn = document.querySelector(".toggle");
-const dmIcon = document.querySelector(".dm-con");
+const dmIcon = document.querySelector(".dm-icon");
+const afIcon = document.querySelectorAll(".af-icon");
 const body = document.querySelector("body");
 const toolTip = document.querySelector(".tooltip-text");
 const sections = document.querySelectorAll(".question");
@@ -33,8 +34,9 @@ function togglePage() {
   nameBtn.classList.toggle("light-mode");
   toggleBtn.classList.toggle("light-mode");
   dmIcon.classList.toggle("light-mode");
+  afIcon.forEach((icon) => icon.classList.toggle("light-mode"));
   toolTip.classList.toggle("light-mode");
-  nxtBtn.classList.toggle("light-mode");
+  nxtBtn.forEach((button) => button.classList.toggle("light-mode"));
 
   //to change the border color of the sections
   sections.forEach((section) => {
@@ -54,15 +56,15 @@ toggleBtn.addEventListener("click", togglePage);
 //
 // Next page button
 
-function nextPage() {
-  let currentSection = nxtBtn.closest("section");
-  currentSection.classList.add("hidden");
+nxtBtn.forEach((button) => {
+  button.addEventListener("click", () => {
+    let currentSection = button.closest("section");
+    currentSection.classList.add("hidden");
 
-  let nextSection = nxtBtn.closest("section").nextElementSibling;
-  nextSection.classList.remove("hidden");
-}
-
-nxtBtn.addEventListener("click", nextPage);
+    let nextSection = button.closest("section").nextElementSibling;
+    nextSection.classList.remove("hidden");
+  });
+});
 
 //
 // Check if all inputs are filled
