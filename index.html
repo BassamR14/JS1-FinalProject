@@ -11,37 +11,42 @@
       rel="stylesheet" />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=dark_mode" />
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=arrow_forward,dark_mode" />
   </head>
   <body>
-    <h1>Ankademin Quiz</h1>
-    <section class="introduction">
-      <label>
-        Name:
-        <input
-          type="text"
-          name="name"
-          id="name"
-          placeholder="Enter your name" />
-      </label>
-      <button class="submit-name">Submit</button>
-    </section>
     <button class="toggle">
-      <span class="material-symbols-outlined"> dark_mode </span>
+      <span class="material-symbols-outlined dm-icon dark-mode">
+        dark_mode
+      </span>
       <span class="tooltip-text">Dark Mode</span>
     </button>
 
-    <h2>True or False</h2>
+    <section class="introduction flex">
+      <h1>Ankademin Quiz</h1>
+      <div>
+        <label class="intro-label">
+          Name:
+          <input
+            type="text"
+            name="name"
+            id="name"
+            placeholder="Enter your name" />
+        </label>
+        <button class="submit-name">Submit</button>
+      </div>
 
-    <section class="question">
+      <button class="next-page">
+        <span class="material-symbols-outlined dark-mode"> arrow_forward </span>
+      </button>
+    </section>
+
+    <section class="question hidden flex">
+      <h2>True or False</h2>
+
       <h3>Question 1</h3>
       <p>Cats can’t taste sweetness?</p>
       <label>
-        <input
-          type="radio"
-          name="question1"
-          id="question1-true"
-          value="correct" />
+        <input type="radio" name="question1" id="question1-true" value="True" />
         True
       </label>
       <label>
@@ -49,20 +54,21 @@
           type="radio"
           name="question1"
           id="question1-false"
-          value="wrong" />
+          value="False" />
         False
       </label>
+      <button class="next-page">
+        <span class="material-symbols-outlined arrow-forward">
+          arrow_forward
+        </span>
+      </button>
     </section>
 
-    <section class="question">
+    <section class="question hidden flex">
       <h3>Question 2</h3>
       <p>All cats are completely nocturnal?</p>
       <label>
-        <input
-          type="radio"
-          name="question2"
-          id="question2-true"
-          value="wrong" />
+        <input type="radio" name="question2" id="question2-true" value="True" />
         True
       </label>
       <label>
@@ -70,141 +76,209 @@
           type="radio"
           name="question2"
           id="question2-false"
-          value="correct" />
+          value="False" />
         False
       </label>
+      <button class="next-page">
+        <span class="material-symbols-outlined arrow-forward">
+          arrow_forward
+        </span>
+      </button>
     </section>
 
-    <h2>Multiple Choice - Pick One</h2>
+    <section class="question hidden flex">
+      <h2>Multiple Choice - Pick One</h2>
 
-    <section class="question">
       <h3>Question 3</h3>
       <p>Which breed is known for being hairless?</p>
 
       <label>
-        <input type="radio" name="question3" id="question3-A" value="wrong" />
+        <input
+          type="radio"
+          name="question3"
+          id="question3-A"
+          value="Maine Coon" />
         Maine Coon
       </label>
 
       <label>
-        <input type="radio" name="question3" id="question3-B" value="correct" />
+        <input type="radio" name="question3" id="question3-B" value="Sphynx" />
         Sphynx
       </label>
 
       <label>
-        <input type="radio" name="question3" id="question3-C" value="wrong" />
+        <input type="radio" name="question3" id="question3-C" value="Persian" />
         Persian
       </label>
 
       <label>
-        <input type="radio" name="question3" id="question3-D" value="wrong" />
+        <input type="radio" name="question3" id="question3-D" value="Bengal" />
         Bengal
       </label>
+      <button class="next-page">
+        <span class="material-symbols-outlined arrow-forward">
+          arrow_forward
+        </span>
+      </button>
     </section>
 
-    <section class="question">
+    <section class="question hidden flex">
       <h3>Question 4</h3>
       <p>What is the average lifespan of an indoor cat?</p>
 
       <label>
-        <input type="radio" name="question4" id="question4-A" value="wrong" />
+        <input
+          type="radio"
+          name="question4"
+          id="question4-A"
+          value="3–5 years" />
         3–5 years
       </label>
 
       <label>
-        <input type="radio" name="question4" id="question4-B" value="wrong" />
+        <input
+          type="radio"
+          name="question4"
+          id="question4-B"
+          value="6–8 years" />
         6–8 years
       </label>
 
       <label>
-        <input type="radio" name="question4" id="question4-C" value="correct" />
+        <input
+          type="radio"
+          name="question4"
+          id="question4-C"
+          value="12–15 years" />
         12–15 years
       </label>
 
       <label>
-        <input type="radio" name="question4" id="question4-D" value="wrong" />
+        <input
+          type="radio"
+          name="question4"
+          id="question4-D"
+          value="20–25 years" />
         20–25 years
       </label>
+      <button class="next-page">
+        <span class="material-symbols-outlined arrow-forward">
+          arrow_forward
+        </span>
+      </button>
     </section>
 
-    <section class="question">
+    <section class="question hidden flex">
       <h3>Question 5</h3>
       <p>What is a group of kittens called?</p>
 
       <label>
-        <input type="radio" name="question5" id="question5-A" value="correct" />
+        <input
+          type="radio"
+          name="question5"
+          id="question5-A"
+          value="A litter" />
         A litter
       </label>
 
       <label>
-        <input type="radio" name="question5" id="question5-B" value="wrong" /> A
-        pack
+        <input
+          type="radio"
+          name="question5"
+          id="question5-B"
+          value="A
+        pack" />
+        A pack
       </label>
 
       <label>
-        <input type="radio" name="question5" id="question5-C" value="wrong" /> A
-        flock
+        <input
+          type="radio"
+          name="question5"
+          id="question5-C"
+          value="A
+        flock" />
+        A flock
       </label>
 
       <label>
-        <input type="radio" name="question5" id="question5-D" value="wrong" /> A
-        pride
+        <input
+          type="radio"
+          name="question5"
+          id="question5-D"
+          value="A
+        pride" />
+        A pride
       </label>
+      <button class="next-page">
+        <span class="material-symbols-outlined arrow-forward">
+          arrow_forward
+        </span>
+      </button>
     </section>
 
-    <section class="question">
+    <section class="question hidden flex">
       <h3>Question 6</h3>
       <p>What do cats primarily use their whiskers for?</p>
 
       <label>
-        <input type="radio" name="question6" id="question6-A" value="wrong" />
+        <input
+          type="radio"
+          name="question6"
+          id="question6-A"
+          value="Tasting food" />
         Tasting food
       </label>
 
       <label>
-        <input type="radio" name="question6" id="question6-B" value="correct" />
+        <input
+          type="radio"
+          name="question6"
+          id="question6-B"
+          value="Balance and sensing environment" />
         Balance and sensing environment
       </label>
 
       <label>
-        <input type="radio" name="question6" id="question6-C" value="wrong" />
+        <input
+          type="radio"
+          name="question6"
+          id="question6-C"
+          value="Hearing better" />
         Hearing better
       </label>
 
       <label>
-        <input type="radio" name="question6" id="question6-D" value="wrong" />
+        <input
+          type="radio"
+          name="question6"
+          id="question6-D"
+          value="Sleeping better" />
         Sleeping better
       </label>
+      <button class="next-page">
+        <span class="material-symbols-outlined arrow-forward">
+          arrow_forward
+        </span>
+      </button>
     </section>
 
-    <h2>Multiple Choice (Pick 1-2)</h2>
+    <section class="question hidden flex">
+      <h2>Multiple Choice (Pick 1-2)</h2>
 
-    <section class="question">
       <h3>Question 7</h3>
       <p>Which of the following are common cat vocalizations?</p>
 
       <label>
-        <input
-          type="checkbox"
-          name="question7"
-          id="question7-A"
-          value="correct" />
+        <input type="checkbox" name="question7" id="question7-A" value="Meow" />
         Meow
       </label>
       <label>
-        <input
-          type="checkbox"
-          name="question7"
-          id="question7-B"
-          value="wrong" />
+        <input type="checkbox" name="question7" id="question7-B" value="Roar" />
         Roar
       </label>
       <label>
-        <input
-          type="checkbox"
-          name="question7"
-          id="question7-C"
-          value="correct" />
+        <input type="checkbox" name="question7" id="question7-C" value="Purr" />
         Purr
       </label>
       <label>
@@ -212,12 +286,17 @@
           type="checkbox"
           name="question7"
           id="question7-D"
-          value="wrong" />
+          value="Chirp" />
         Chirp
       </label>
+      <button class="next-page">
+        <span class="material-symbols-outlined arrow-forward">
+          arrow_forward
+        </span>
+      </button>
     </section>
 
-    <section class="question">
+    <section class="question hidden flex">
       <h3>Question 8</h3>
       <p>What do cats commonly do to show affection?</p>
 
@@ -226,7 +305,7 @@
           type="checkbox"
           name="question8"
           id="question8-A"
-          value="correct" />
+          value="Head-butting" />
         Head-butting
       </label>
       <label>
@@ -234,7 +313,7 @@
           type="checkbox"
           name="question8"
           id="question8-B"
-          value="wrong" />
+          value="Hissing" />
         Hissing
       </label>
       <label>
@@ -242,7 +321,7 @@
           type="checkbox"
           name="question8"
           id="question8-C"
-          value="correct" />
+          value="Kneading" />
         Kneading
       </label>
       <label>
@@ -250,12 +329,17 @@
           type="checkbox"
           name="question8"
           id="question8-D"
-          value="wrong" />
+          value="Puffing up fur" />
         Puffing up fur
       </label>
+      <button class="next-page">
+        <span class="material-symbols-outlined arrow-forward">
+          arrow_forward
+        </span>
+      </button>
     </section>
 
-    <section class="question">
+    <section class="question hidden flex">
       <h3>Question 9</h3>
       <p>Which foods are safe for cats in small amounts?</p>
 
@@ -264,7 +348,7 @@
           type="checkbox"
           name="question9"
           id="question9-A"
-          value="correct" />
+          value="Plain cooked chicken" />
         Plain cooked chicken
       </label>
       <label>
@@ -272,7 +356,7 @@
           type="checkbox"
           name="question9"
           id="question9-B"
-          value="wrong" />
+          value="Chocolate" />
         Chocolate
       </label>
       <label>
@@ -280,7 +364,7 @@
           type="checkbox"
           name="question9"
           id="question9-C"
-          value="wrong" />
+          value="Grapes" />
         Grapes
       </label>
       <label>
@@ -288,12 +372,17 @@
           type="checkbox"
           name="question9"
           id="question9-D"
-          value="correct" />
+          value="Cooked fish (boneless)" />
         Cooked fish (boneless)
       </label>
+      <button class="next-page">
+        <span class="material-symbols-outlined arrow-forward">
+          arrow_forward
+        </span>
+      </button>
     </section>
 
-    <section class="question">
+    <section class="question hidden flex">
       <h3>Question 10</h3>
       <p>Which senses are highly developed in cats?</p>
 
@@ -302,7 +391,7 @@
           type="checkbox"
           name="question10"
           id="question10-A"
-          value="correct" />
+          value="Vision" />
         Vision
       </label>
       <label>
@@ -310,7 +399,7 @@
           type="checkbox"
           name="question10"
           id="question10-B"
-          value="wrong" />
+          value="Smell" />
         Smell
       </label>
       <label>
@@ -318,7 +407,7 @@
           type="checkbox"
           name="question10"
           id="question10-C"
-          value="wrong" />
+          value="Taste" />
         Taste
       </label>
       <label>
@@ -326,10 +415,14 @@
           type="checkbox"
           name="question10"
           id="question10-D"
-          value="correct" />
+          value="Touch" />
         Touch
       </label>
+      <button class="next-page">
+        <span class="material-symbols-outlined arrow-forward">
+          arrow_forward
+        </span>
+      </button>
     </section>
-    <button class="submit">Submit</button>
   </body>
 </html>

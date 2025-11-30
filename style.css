@@ -4,15 +4,20 @@
 }
 
 body {
+  height: 100vh;
+  width: 100vw;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  gap: 10px;
 }
 
-.introduction {
-  margin-bottom: 10px;
+.flex {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
 
 #name {
@@ -26,28 +31,30 @@ body {
   padding: 10px;
 }
 
-.question.white-border {
-  border: 1px solid var(--white);
-}
-
-h3 {
-  margin-top: 0;
-}
-
 h1,
 h2,
 h3 {
   font-family: Poppins, sans-serif;
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 p {
   font-family: Inter, sans-serif;
   font-size: 1.1rem;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 label {
   font-family: "Source Sans 3", sans-serif;
   font-size: 1.1rem;
+}
+
+.dark-mode {
+  color: var(--white);
+  background-color: var(--dark-color);
 }
 
 .toggle {
@@ -59,8 +66,15 @@ label {
   border-radius: 15px;
 }
 
-.material-symbols-outlined {
+.material-symbols-outlined.dark-mode {
   color: var(--white);
+}
+
+.next-page {
+  padding: 10px;
+  background-color: var(--dark-color);
+  border-radius: 15px;
+  display: block;
 }
 
 .tooltip-text {
@@ -77,16 +91,43 @@ label {
   z-index: 1;
 }
 
-.toggle:hover .tooltip-text {
-  visibility: visible;
-}
-
-.dark-mode {
+.submit-name {
+  padding: 5px 10px;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-family: "Source Sans 3", sans-serif;
+  background-color: #2a2a2a;
   color: var(--white);
-  background-color: var(--dark-color);
 }
 
-.submit.light-mode {
+.result {
+  border: 1px solid var(--dark-color);
+  background-color: var(--dark-color);
+  padding: 10px;
+  border-radius: 15px;
+}
+
+.result p {
+  font-size: 1.5rem;
+}
+
+/* label:hover {
+  outline: 1px solid black;
+  background-color: black;
+  color: white;
+} */
+
+.hidden {
+  display: none;
+}
+
+/* Toggle effects */
+
+.question.white-border {
+  border: 1px solid var(--white);
+}
+
+.next-page.light-mode {
   color: var(--dark-color);
   background-color: var(--white);
 }
@@ -109,38 +150,7 @@ label {
   background-color: var(--white);
 }
 
-button:hover {
-  cursor: pointer;
-}
-
-.submit-name {
-  padding: 5px 10px;
-  border-radius: 10px;
-  font-size: 1rem;
-  font-family: "Source Sans 3", sans-serif;
-  background-color: #2a2a2a;
-  color: var(--white);
-}
-
-.submit {
-  padding: 20px;
-  border-radius: 10px;
-  font-size: 1.4rem;
-  font-family: "Source Sans 3", sans-serif;
-  background-color: var(--dark-color);
-  color: var(--white);
-}
-
-.result {
-  border: 1px solid var(--dark-color);
-  background-color: var(--dark-color);
-  padding: 10px;
-  border-radius: 15px;
-}
-
-.result p {
-  font-size: 1.5rem;
-}
+/* Hover effects */
 
 input[type="radio"]:hover,
 input[type="checkbox"]:hover,
@@ -148,8 +158,10 @@ label:hover {
   cursor: pointer;
 }
 
-/* label:hover {
-  outline: 1px solid black;
-  background-color: black;
-  color: white;
-} */
+button:hover {
+  cursor: pointer;
+}
+
+.toggle:hover .tooltip-text {
+  visibility: visible;
+}

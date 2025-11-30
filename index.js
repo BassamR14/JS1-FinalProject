@@ -1,15 +1,18 @@
 //Create welcome message.
 const nameInput = document.querySelector("#name");
 const nameBtn = document.querySelector(".submit-name");
+const introLabel = document.querySelector(".intro-label");
 const intro = document.querySelector(".introduction");
+const nxtBtn = document.querySelector(".next-page");
 
 function welcomeMessage() {
   const name = nameInput.value;
-  intro.style.display = "none";
+  introLabel.style.display = "none";
+  nameBtn.style.display = "none";
 
   const introMsg = document.createElement("h2");
   introMsg.innerText = `Welcome ${name} and good luck!`;
-  body.insertBefore(introMsg, toggleBtn);
+  intro.insertBefore(introMsg, nxtBtn);
 }
 
 nameBtn.addEventListener("click", welcomeMessage);
@@ -17,7 +20,7 @@ nameBtn.addEventListener("click", welcomeMessage);
 //
 // Toggle button changes style of page - dark mode -light mode
 const toggleBtn = document.querySelector(".toggle");
-const icon = document.querySelector(".material-symbols-outlined");
+const dmIcon = document.querySelector(".dm-con");
 const body = document.querySelector("body");
 const toolTip = document.querySelector(".tooltip-text");
 const sections = document.querySelectorAll(".question");
@@ -26,11 +29,12 @@ function togglePage() {
   //changes background and text color of page
   body.classList.toggle("dark-mode");
   //changes button background and text color
-  submitBtn.classList.toggle("light-mode");
+  // submitBtn.classList.toggle("light-mode");
   nameBtn.classList.toggle("light-mode");
   toggleBtn.classList.toggle("light-mode");
-  icon.classList.toggle("light-mode");
+  dmIcon.classList.toggle("light-mode");
   toolTip.classList.toggle("light-mode");
+  nxtBtn.classList.toggle("light-mode");
 
   //to change the border color of the sections
   sections.forEach((section) => {
@@ -46,6 +50,19 @@ function togglePage() {
 }
 
 toggleBtn.addEventListener("click", togglePage);
+
+//
+// Next page button
+
+function nextPage() {
+  let currentSection = nxtBtn.closest("section");
+  currentSection.classList.add("hidden");
+
+  let nextSection = nxtBtn.closest("section").nextElementSibling;
+  nextSection.classList.remove("hidden");
+}
+
+nxtBtn.addEventListener("click", nextPage);
 
 //
 // Check if all inputs are filled
@@ -104,34 +121,28 @@ function checkInputs() {
 //
 // Radio buttons
 
-let correctAnswers = 0;
+let score = 0;
 
-function checkRadioAnswers() {
+const correctAnswers = [
+  "True",
+  "False",
+  "Sphynx",
+  "12–15 years",
+  "A litter",
+  "Balance and sensing environment",
+  ["Meow", "Purr"],
+  ["Head-butting", "Kneading"],
+  ["Plain cooked chicken", "Cooked fish (boneless)"],
+  ["Vision", "Touch"],
+];
+
+function checkAnswers() {
   const q1Input = document.querySelector("[name=question1]:checked");
   const q2Input = document.querySelector("[name=question2]:checked");
   const q3Input = document.querySelector("[name=question3]:checked");
   const q4Input = document.querySelector("[name=question4]:checked");
   const q5Input = document.querySelector("[name=question5]:checked");
   const q6Input = document.querySelector("[name=question6]:checked");
-
-  const radioArray = [q1Input, q2Input, q3Input, q4Input, q5Input, q6Input];
-
-  //returns how many correct answers(points) the user has gotten + shows correct/wrong answers
-  radioArray.forEach((input) => {
-    if (input.value === "correct") {
-      correctAnswers += 1;
-      input.closest(".question").style.backgroundColor = "#28a745";
-    } else {
-      input.closest(".question").style.backgroundColor = "#dc3545";
-    }
-  });
-}
-
-//
-//Checkboxes
-
-function checkCheckboxAnswers() {
-  //turned into arrays so some()/filter() could be used.
   const q7Input = Array.from(
     document.querySelectorAll("[name=question7]:checked")
   );
@@ -145,78 +156,96 @@ function checkCheckboxAnswers() {
     document.querySelectorAll("[name=question10]:checked")
   );
 
-  const checkboxArray = [q7Input, q8Input, q9Input, q10Input];
+  const selectedAnswers = [
+    q1Input.value,
+    q2Input.value,
+    q3Input.value,
+    q4Input.value,
+    q5Input.value,
+    q6Input.value,
+    q7Input.map((element) => element.value),
+    q8Input.map((element) => element.value),
+    q9Input.map((element) => element.value),
+    q10Input.map((element) => element.value),
+  ];
 
-  //returns how many correct answers the user got i.e. returns points.
-  checkboxArray.forEach((input) => {
-    //this wouldn't work if the user picked 1 correct and 1 wrong.
-    // if (input.some((answer) => answer.value === "correct")) {
-    //   console.log(input);
-    //   correctAnswers += 1;
-    // }
+  // console.log(selectedAnswers, correctAnswers);
 
-    //find out how many correct answers were selected
-    const correctSelected = input.filter(
-      (answer) => answer.value === "correct"
-    ).length;
-
-    //find out how many wrong answers were selected
-    const wrongSelected = input.filter(
-      (answer) => answer.value === "wrong"
-    ).length;
-
-    //to get a point + show correct/wrong answers
-    if (wrongSelected === 0 && correctSelected > 0 && input.length <= 2) {
-      correctAnswers += 1;
-      input[0].closest(".question").style.backgroundColor = "#28a745";
-    } else {
-      input[0].closest(".question").style.backgroundColor = "#dc3545";
+  for (i = 0; i < selectedAnswers.length - 4; i++) {
+    if (selectedAnswers[i] === correctAnswers[i]) {
+      score++;
     }
-  });
+  }
+
+  //this gives 2 points if both selected answers are correct, and still gives a point if 1 of the answers is wrong.
+  // for (i = 6; i < selectedAnswers.length; i++) {
+  //   for (x = 0; x < 2; x++) {
+  //     if (selectedAnswers[i][x] === correctAnswers[i][x]) {
+  //       score++;
+  //     }
+  //   }
+  // }
+
+  for (i = 6; i < selectedAnswers.length; i++) {
+    const user = selectedAnswers[i];
+    const correct = correctAnswers[i];
+
+    const hasWrong = user.some((ans) => !correct.includes(ans));
+    const hasAtLeastOneCorrect = user.some((ans) => correct.includes(ans));
+
+    // if the selected answer/s contains 1 wrong, continue to the next iteration of the loop.
+    if (hasWrong) {
+      continue;
+    }
+
+    // if at least 1 answer is correct, give a score, we know that the 2nd answer is also correct because of hasWrong.
+    if (hasAtLeastOneCorrect) {
+      score++;
+    }
+  }
 }
 
 //
 // Result Message
 
-function showResult() {
-  let div = document.createElement("div");
-  div.classList.add("result");
-  let para = document.createElement("p");
+// function showResult() {
+//   let div = document.createElement("div");
+//   div.classList.add("result");
+//   let para = document.createElement("p");
 
-  if (correctAnswers < 5) {
-    para.innerHTML = `Score: ${correctAnswers}/10. You have brought shame to your family. `;
-    // para.style.color = "red";
-    div.style.backgroundColor = "#dc3545";
-  } else if (correctAnswers > 4 && correctAnswers < 8) {
-    para.innerHTML = `Score: ${correctAnswers}/10. You have done well enough. `;
-    // para.style.color = "orange";
-    div.style.backgroundColor = "orange";
-  } else {
-    para.innerHTML = `Score: ${correctAnswers}/10. You have pleased the gods. `;
-    // para.style.color = "green";
-    div.style.backgroundColor = "#28a745";
-  }
+//   if (score < 5) {
+//     para.innerHTML = `Score: ${score}/10. You have brought shame to your family. `;
+//     // para.style.color = "red";
+//     div.style.backgroundColor = "#dc3545";
+//   } else if (score > 4 && score < 8) {
+//     para.innerHTML = `Score: ${score}/10. You have done well enough. `;
+//     // para.style.color = "orange";
+//     div.style.backgroundColor = "orange";
+//   } else {
+//     para.innerHTML = `Score: ${score}/10. You have pleased the gods. `;
+//     // para.style.color = "green";
+//     div.style.backgroundColor = "#28a745";
+//   }
 
-  body.append(div);
-  div.append(para);
-}
+//   body.append(div);
+//   div.append(para);
+// }
 
 //
 // Submit button
 
-const submitBtn = document.querySelector(".submit");
+// const submitBtn = document.querySelector(".submit");
 
-submitBtn.addEventListener("click", () => {
-  //clear correct answers.
-  correctAnswers = 0;
+// submitBtn.addEventListener("click", () => {
+//   //clear correct answers.
+//   score = 0;
 
-  //to make sure all inputs are filled then run the other functions.
-  if (!checkInputs()) {
-    return;
-  }
+//   //to make sure all inputs are filled then run the other functions.
+//   if (!checkInputs()) {
+//     return;
+//   }
 
-  checkRadioAnswers();
-  checkCheckboxAnswers();
-  console.log(correctAnswers);
-  showResult();
-});
+//   checkAnswers();
+//   console.log(score);
+//   // showResult();
+// });
