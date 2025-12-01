@@ -4,6 +4,7 @@ const nameBtn = document.querySelector(".submit-name");
 const introLabel = document.querySelector(".intro-label");
 const intro = document.querySelector(".introduction");
 const nxtBtn = document.querySelectorAll(".next-page");
+const div = document.querySelector("div");
 
 function welcomeMessage() {
   const name = nameInput.value;
@@ -12,7 +13,8 @@ function welcomeMessage() {
 
   const introMsg = document.createElement("h2");
   introMsg.innerText = `Welcome ${name} and good luck!`;
-  intro.insertBefore(introMsg, nxtBtn);
+  // intro.insertBefore(introMsg, nxtBtn);
+  div.insertAdjacentElement("afterend", introMsg);
 }
 
 nameBtn.addEventListener("click", welcomeMessage);
@@ -54,10 +56,41 @@ function togglePage() {
 toggleBtn.addEventListener("click", togglePage);
 
 //
-// Next page button
+// Next page button + check whether something was selected
 
 nxtBtn.forEach((button) => {
   button.addEventListener("click", () => {
+    let section = button.closest("section");
+    let radioInputs = section.querySelectorAll("[type=radio]");
+    let checkboxInputs = section.querySelectorAll("[type=checkbox]");
+
+    // checks what is inside the section, then checks whether it has been selected, if not, stops function and alerts the user, if yes, goes to next page
+    if (radioInputs.length > 0) {
+      const selected = section.querySelector("[type=radio]:checked");
+
+      if (!selected) {
+        alert("Please select an answer");
+        return;
+      }
+    }
+
+    if (checkboxInputs.length > 0) {
+      const selected = Array.from(
+        section.querySelectorAll("[type=checkbox]:checked")
+      ).map((answer) => answer.value);
+
+      // to make sure no more than 2 checkboxes are selected
+      if (selected.length > 2) {
+        alert("Max 2 choices");
+        return;
+      }
+
+      if (selected.length === 0) {
+        alert("Please select 1-2 answer/s");
+        return;
+      }
+    }
+
     let currentSection = button.closest("section");
     currentSection.classList.add("hidden");
 
@@ -67,61 +100,7 @@ nxtBtn.forEach((button) => {
 });
 
 //
-// Check if all inputs are filled
-
-function checkInputs() {
-  const q1Input = document.querySelector("[name=question1]:checked");
-  const q2Input = document.querySelector("[name=question2]:checked");
-  const q3Input = document.querySelector("[name=question3]:checked");
-  const q4Input = document.querySelector("[name=question4]:checked");
-  const q5Input = document.querySelector("[name=question5]:checked");
-  const q6Input = document.querySelector("[name=question6]:checked");
-  const q7Input = Array.from(
-    document.querySelectorAll("[name=question7]:checked")
-  );
-  const q8Input = Array.from(
-    document.querySelectorAll("[name=question8]:checked")
-  );
-  const q9Input = Array.from(
-    document.querySelectorAll("[name=question9]:checked")
-  );
-  const q10Input = Array.from(
-    document.querySelectorAll("[name=question10]:checked")
-  );
-
-  //checks if radio inputs are null, if checkbox length is 0, i.e. if nothing was selected
-  if (
-    !q1Input ||
-    !q2Input ||
-    !q3Input ||
-    !q4Input ||
-    !q5Input ||
-    !q6Input ||
-    q7Input.length === 0 ||
-    q8Input.length === 0 ||
-    q9Input.length === 0 ||
-    q10Input.length === 0
-  ) {
-    alert("Answer all questions please.");
-    return false;
-  }
-
-  // checks if more than 2 boxes were checked
-  if (
-    q7Input.length > 2 ||
-    q8Input.length > 2 ||
-    q9Input.length > 2 ||
-    q10Input.length > 2
-  ) {
-    alert("Max 2 choices");
-    return false;
-  }
-
-  return true;
-}
-
-//
-// Radio buttons
+// Check Answers and give points
 
 let score = 0;
 
@@ -173,6 +152,8 @@ function checkAnswers() {
 
   // console.log(selectedAnswers, correctAnswers);
 
+  //checks radio button selections.
+
   for (i = 0; i < selectedAnswers.length - 4; i++) {
     if (selectedAnswers[i] === correctAnswers[i]) {
       score++;
@@ -187,6 +168,8 @@ function checkAnswers() {
   //     }
   //   }
   // }
+
+  //checks checkbox selections
 
   for (i = 6; i < selectedAnswers.length; i++) {
     const user = selectedAnswers[i];
@@ -208,46 +191,46 @@ function checkAnswers() {
 }
 
 //
-// Result Message
+// Result Page
 
-// function showResult() {
-//   let div = document.createElement("div");
-//   div.classList.add("result");
-//   let para = document.createElement("p");
+const resultPage = document.querySelector(".result-page");
 
-//   if (score < 5) {
-//     para.innerHTML = `Score: ${score}/10. You have brought shame to your family. `;
-//     // para.style.color = "red";
-//     div.style.backgroundColor = "#dc3545";
-//   } else if (score > 4 && score < 8) {
-//     para.innerHTML = `Score: ${score}/10. You have done well enough. `;
-//     // para.style.color = "orange";
-//     div.style.backgroundColor = "orange";
-//   } else {
-//     para.innerHTML = `Score: ${score}/10. You have pleased the gods. `;
-//     // para.style.color = "green";
-//     div.style.backgroundColor = "#28a745";
-//   }
+function showResult() {
+  const nameH1 = document.querySelector(".scoreboard h1 span");
+  const scoreH2 = document.querySelector(".scoreboard h2 span");
+  const para = document.querySelector("div p");
+  const image = document.querySelector("div img");
 
-//   body.append(div);
-//   div.append(para);
-// }
+  nameH1.innerText = ` ${nameInput.value}`;
+  scoreH2.innerText = ` ${score}`;
 
-//
-// Submit button
+  if (score < 5) {
+    para.innerText = "Fail";
+    para.style.color = "red";
+  } else if (score > 4 && score < 8) {
+    para.innerText = "Good";
+    para.style.color = "orange";
+  } else {
+    para.innerText = "Excellent";
+    para.style.color = "green";
+  }
+}
 
-// const submitBtn = document.querySelector(".submit");
+// Check result button
 
-// submitBtn.addEventListener("click", () => {
-//   //clear correct answers.
-//   score = 0;
+const checkResultBtn = document.querySelector(".check-result");
 
-//   //to make sure all inputs are filled then run the other functions.
-//   if (!checkInputs()) {
-//     return;
-//   }
+checkResultBtn.addEventListener("click", () => {
+  //clear correct answers.
+  score = 0;
 
-//   checkAnswers();
-//   console.log(score);
-//   // showResult();
-// });
+  checkAnswers();
+  console.log(score);
+  showResult();
+
+  const currentSection = checkResultBtn.closest("section");
+  currentSection.classList.add("hidden");
+
+  const nextSection = checkResultBtn.closest("section").nextElementSibling;
+  nextSection.classList.remove("hidden");
+});

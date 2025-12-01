@@ -1,6 +1,6 @@
 :root {
   --dark-color: #2e2e2e;
-  --white: white;
+  --white: #fdf7f2;
 }
 
 body {
@@ -10,6 +10,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: var(--white);
 }
 
 .flex {
@@ -115,12 +116,11 @@ label {
   font-size: 1.5rem;
 }
 
-/* label:hover {
-  outline: 1px solid black;
-  background-color: black;
-  color: white;
-} */
+.scoreboard img {
+  width: 500px;
+}
 
+/* keep last so display:hidden overwrites all others */
 .hidden {
   display: none;
 }
