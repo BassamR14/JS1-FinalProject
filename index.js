@@ -117,40 +117,69 @@ const correctAnswers = [
   ["Vision", "Touch"],
 ];
 
+//To get input values in multiple functions
+function getQuizInputs() {
+  return {
+    q1: document.querySelector("[name=question1]:checked"),
+    q2: document.querySelector("[name=question2]:checked"),
+    q3: document.querySelector("[name=question3]:checked"),
+    q4: document.querySelector("[name=question4]:checked"),
+    q5: document.querySelector("[name=question5]:checked"),
+    q6: document.querySelector("[name=question6]:checked"),
+    q7: Array.from(document.querySelectorAll("[name=question7]:checked")),
+    q8: Array.from(document.querySelectorAll("[name=question8]:checked")),
+    q9: Array.from(document.querySelectorAll("[name=question9]:checked")),
+    q10: Array.from(document.querySelectorAll("[name=question10]:checked")),
+  };
+}
+
 function checkAnswers() {
-  const q1Input = document.querySelector("[name=question1]:checked");
-  const q2Input = document.querySelector("[name=question2]:checked");
-  const q3Input = document.querySelector("[name=question3]:checked");
-  const q4Input = document.querySelector("[name=question4]:checked");
-  const q5Input = document.querySelector("[name=question5]:checked");
-  const q6Input = document.querySelector("[name=question6]:checked");
-  const q7Input = Array.from(
-    document.querySelectorAll("[name=question7]:checked")
-  );
-  const q8Input = Array.from(
-    document.querySelectorAll("[name=question8]:checked")
-  );
-  const q9Input = Array.from(
-    document.querySelectorAll("[name=question9]:checked")
-  );
-  const q10Input = Array.from(
-    document.querySelectorAll("[name=question10]:checked")
-  );
+  // const q1Input = document.querySelector("[name=question1]:checked");
+  // const q2Input = document.querySelector("[name=question2]:checked");
+  // const q3Input = document.querySelector("[name=question3]:checked");
+  // const q4Input = document.querySelector("[name=question4]:checked");
+  // const q5Input = document.querySelector("[name=question5]:checked");
+  // const q6Input = document.querySelector("[name=question6]:checked");
+  // const q7Input = Array.from(
+  //   document.querySelectorAll("[name=question7]:checked")
+  // );
+  // const q8Input = Array.from(
+  //   document.querySelectorAll("[name=question8]:checked")
+  // );
+  // const q9Input = Array.from(
+  //   document.querySelectorAll("[name=question9]:checked")
+  // );
+  // const q10Input = Array.from(
+  //   document.querySelectorAll("[name=question10]:checked")
+  // );
+
+  // const selectedAnswers = [
+  //   q1Input.value,
+  //   q2Input.value,
+  //   q3Input.value,
+  //   q4Input.value,
+  //   q5Input.value,
+  //   q6Input.value,
+  //   q7Input.map((element) => element.value),
+  //   q8Input.map((element) => element.value),
+  //   q9Input.map((element) => element.value),
+  //   q10Input.map((element) => element.value),
+  // ];
+
+  const inputs = getQuizInputs();
 
   const selectedAnswers = [
-    q1Input.value,
-    q2Input.value,
-    q3Input.value,
-    q4Input.value,
-    q5Input.value,
-    q6Input.value,
-    q7Input.map((element) => element.value),
-    q8Input.map((element) => element.value),
-    q9Input.map((element) => element.value),
-    q10Input.map((element) => element.value),
+    inputs.q1.value,
+    inputs.q2.value,
+    inputs.q3.value,
+    inputs.q4.value,
+    inputs.q5.value,
+    inputs.q6.value,
+    inputs.q7.map((el) => el.value),
+    inputs.q8.map((el) => el.value),
+    inputs.q9.map((el) => el.value),
+    inputs.q10.map((el) => el.value),
   ];
-
-  // console.log(selectedAnswers, correctAnswers);
 
   //checks radio button selections.
 
@@ -196,6 +225,7 @@ function checkAnswers() {
 const resultPage = document.querySelector(".result-page");
 
 function showResult() {
+  //scoreboard
   const nameH1 = document.querySelector(".scoreboard h1 span");
   const scoreH2 = document.querySelector(".scoreboard h2 span");
   const para = document.querySelector("div p");
@@ -214,6 +244,35 @@ function showResult() {
     para.innerText = "Excellent";
     para.style.color = "green";
   }
+
+  //showing user answers + correct answers
+  const userList = document.querySelector(".user-answers");
+  const correctAnswersList = document.querySelector(".correct-answers");
+
+  const inputs = getQuizInputs();
+
+  const selectedAnswers = [
+    inputs.q1.value,
+    inputs.q2.value,
+    inputs.q3.value,
+    inputs.q4.value,
+    inputs.q5.value,
+    inputs.q6.value,
+    inputs.q7.map((el) => el.value),
+    inputs.q8.map((el) => el.value),
+    inputs.q9.map((el) => el.value),
+    inputs.q10.map((el) => el.value),
+  ];
+
+  for (i = 0; i < selectedAnswers.length; i++) {
+    let li = document.createElement("li");
+    li.innerText = `${selectedAnswers[i]}`;
+    userList.append(li);
+    console.log(correctAnswers[i]);
+    let li2 = document.createElement("li");
+    li2.innerText = `${correctAnswers[i]}`;
+    correctAnswersList.append(li2);
+  }
 }
 
 // Check result button
@@ -225,7 +284,7 @@ checkResultBtn.addEventListener("click", () => {
   score = 0;
 
   checkAnswers();
-  console.log(score);
+  // console.log(score);
   showResult();
 
   const currentSection = checkResultBtn.closest("section");
