@@ -383,22 +383,24 @@
           value="Touch" />
         Touch
       </label>
-      <button class="check-result">Check Result</button>
+      <button class="next-page">Check Result</button>
     </section>
-    <section class="result-page hidden flex2">
+    <section class="result-page hidden flex">
       <div class="scoreboard flex">
         <h1>Name:<span></span></h1>
-        <h2>Score:<span></span></h2>
+        <h2>Score:<span></span>/10</h2>
         <p></p>
         <img src="" alt="" />
       </div>
-      <div class="show-result">
-        <h2>Your Answers:</h2>
-        <ul class="user-answers"></ul>
-      </div>
-      <div class="show-result">
-        <h2>Correct Answers:</h2>
-        <ul class="correct-answers"></ul>
+      <div class="flex2">
+        <div class="show-result right-border">
+          <h2>Your Answers:</h2>
+          <ol class="user-answers"></ol>
+        </div>
+        <div class="show-result">
+          <h2>Correct Answers:</h2>
+          <ol class="correct-answers"></ol>
+        </div>
       </div>
     </section>
   </body>

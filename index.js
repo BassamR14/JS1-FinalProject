@@ -56,50 +56,6 @@ function togglePage() {
 toggleBtn.addEventListener("click", togglePage);
 
 //
-// Next page button + check whether something was selected
-
-nxtBtn.forEach((button) => {
-  button.addEventListener("click", () => {
-    let section = button.closest("section");
-    let radioInputs = section.querySelectorAll("[type=radio]");
-    let checkboxInputs = section.querySelectorAll("[type=checkbox]");
-
-    // checks what is inside the section, then checks whether it has been selected, if not, stops function and alerts the user, if yes, goes to next page
-    if (radioInputs.length > 0) {
-      const selected = section.querySelector("[type=radio]:checked");
-
-      if (!selected) {
-        alert("Please select an answer");
-        return;
-      }
-    }
-
-    if (checkboxInputs.length > 0) {
-      const selected = Array.from(
-        section.querySelectorAll("[type=checkbox]:checked")
-      ).map((answer) => answer.value);
-
-      // to make sure no more than 2 checkboxes are selected
-      if (selected.length > 2) {
-        alert("Max 2 choices");
-        return;
-      }
-
-      if (selected.length === 0) {
-        alert("Please select 1-2 answer/s");
-        return;
-      }
-    }
-
-    let currentSection = button.closest("section");
-    currentSection.classList.add("hidden");
-
-    let nextSection = button.closest("section").nextElementSibling;
-    nextSection.classList.remove("hidden");
-  });
-});
-
-//
 // Check Answers and give points
 
 let score = 0;
@@ -134,38 +90,6 @@ function getQuizInputs() {
 }
 
 function checkAnswers() {
-  // const q1Input = document.querySelector("[name=question1]:checked");
-  // const q2Input = document.querySelector("[name=question2]:checked");
-  // const q3Input = document.querySelector("[name=question3]:checked");
-  // const q4Input = document.querySelector("[name=question4]:checked");
-  // const q5Input = document.querySelector("[name=question5]:checked");
-  // const q6Input = document.querySelector("[name=question6]:checked");
-  // const q7Input = Array.from(
-  //   document.querySelectorAll("[name=question7]:checked")
-  // );
-  // const q8Input = Array.from(
-  //   document.querySelectorAll("[name=question8]:checked")
-  // );
-  // const q9Input = Array.from(
-  //   document.querySelectorAll("[name=question9]:checked")
-  // );
-  // const q10Input = Array.from(
-  //   document.querySelectorAll("[name=question10]:checked")
-  // );
-
-  // const selectedAnswers = [
-  //   q1Input.value,
-  //   q2Input.value,
-  //   q3Input.value,
-  //   q4Input.value,
-  //   q5Input.value,
-  //   q6Input.value,
-  //   q7Input.map((element) => element.value),
-  //   q8Input.map((element) => element.value),
-  //   q9Input.map((element) => element.value),
-  //   q10Input.map((element) => element.value),
-  // ];
-
   const inputs = getQuizInputs();
 
   const selectedAnswers = [
@@ -175,10 +99,10 @@ function checkAnswers() {
     inputs.q4.value,
     inputs.q5.value,
     inputs.q6.value,
-    inputs.q7.map((el) => el.value),
-    inputs.q8.map((el) => el.value),
-    inputs.q9.map((el) => el.value),
-    inputs.q10.map((el) => el.value),
+    inputs.q7.map((element) => element.value),
+    inputs.q8.map((element) => element.value),
+    inputs.q9.map((element) => element.value),
+    inputs.q10.map((element) => element.value),
   ];
 
   //checks radio button selections.
@@ -205,7 +129,7 @@ function checkAnswers() {
     const correct = correctAnswers[i];
 
     const hasWrong = user.some((ans) => !correct.includes(ans));
-    const hasAtLeastOneCorrect = user.some((ans) => correct.includes(ans));
+    const hasCorrect = user.some((ans) => correct.includes(ans));
 
     // if the selected answer/s contains 1 wrong, continue to the next iteration of the loop.
     if (hasWrong) {
@@ -213,7 +137,7 @@ function checkAnswers() {
     }
 
     // if at least 1 answer is correct, give a score, we know that the 2nd answer is also correct because of hasWrong.
-    if (hasAtLeastOneCorrect) {
+    if (hasCorrect) {
       score++;
     }
   }
@@ -272,24 +196,61 @@ function showResult() {
     let li2 = document.createElement("li");
     li2.innerText = `${correctAnswers[i]}`;
     correctAnswersList.append(li2);
+
+    if (selectedAnswers[i] === correctAnswers[i]) {
+      li.style.color = "green";
+    } else {
+      li.style.color = "red";
+    }
   }
 }
 
-// Check result button
+//
+// Next page button + check whether something was selected + shows result after the last button
 
-const checkResultBtn = document.querySelector(".check-result");
+nxtBtn.forEach((button, index) => {
+  button.addEventListener("click", () => {
+    let section = button.closest("section");
+    let radioInputs = section.querySelectorAll("[type=radio]");
+    let checkboxInputs = section.querySelectorAll("[type=checkbox]");
 
-checkResultBtn.addEventListener("click", () => {
-  //clear correct answers.
-  score = 0;
+    // checks what is inside the section, then checks whether it has been selected, if not, stops function and alerts the user, if yes, goes to next page
+    if (radioInputs.length > 0) {
+      const selected = section.querySelector("[type=radio]:checked");
 
-  checkAnswers();
-  // console.log(score);
-  showResult();
+      if (!selected) {
+        alert("Please select an answer");
+        return;
+      }
+    }
 
-  const currentSection = checkResultBtn.closest("section");
-  currentSection.classList.add("hidden");
+    if (checkboxInputs.length > 0) {
+      const selected = section.querySelectorAll("[type=checkbox]:checked");
+      // to make sure no more than 2 checkboxes are selected
+      if (selected.length > 2) {
+        alert("Max 2 choices");
+        return;
+      }
 
-  const nextSection = checkResultBtn.closest("section").nextElementSibling;
-  nextSection.classList.remove("hidden");
+      if (selected.length === 0) {
+        alert("Please select 1-2 answer/s");
+        return;
+      }
+    }
+
+    const isLast = index === nxtBtn.length - 1;
+
+    if (isLast) {
+      score = 0;
+
+      checkAnswers();
+      showResult();
+    }
+
+    let currentSection = button.closest("section");
+    currentSection.classList.add("hidden");
+
+    let nextSection = button.closest("section").nextElementSibling;
+    nextSection.classList.remove("hidden");
+  });
 });
