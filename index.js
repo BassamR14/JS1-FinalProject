@@ -73,7 +73,7 @@ const correctAnswers = [
   ["Vision", "Touch"],
 ];
 
-//To get input values in multiple functions
+//To be able to use input values in multiple functions
 function getQuizInputs() {
   return {
     q1: document.querySelector("[name=question1]:checked"),
@@ -188,16 +188,36 @@ function showResult() {
     inputs.q10.map((el) => el.value),
   ];
 
-  for (i = 0; i < selectedAnswers.length; i++) {
+  for (i = 0; i < selectedAnswers.length - 4; i++) {
     let li = document.createElement("li");
     li.innerText = `${selectedAnswers[i]}`;
     userList.append(li);
-    console.log(correctAnswers[i]);
     let li2 = document.createElement("li");
     li2.innerText = `${correctAnswers[i]}`;
     correctAnswersList.append(li2);
 
     if (selectedAnswers[i] === correctAnswers[i]) {
+      li.style.color = "green";
+    } else {
+      li.style.color = "red";
+    }
+  }
+
+  for (i = 6; i < selectedAnswers.length; i++) {
+    let li = document.createElement("li");
+    li.innerText = `${selectedAnswers[i]}`;
+    userList.append(li);
+    let li2 = document.createElement("li");
+    li2.innerText = `${correctAnswers[i]}`;
+    correctAnswersList.append(li2);
+
+    const user = selectedAnswers[i];
+    const correct = correctAnswers[i];
+
+    const hasWrong = user.some((ans) => !correct.includes(ans));
+    const hasCorrect = user.some((ans) => correct.includes(ans));
+
+    if (!hasWrong && hasCorrect) {
       li.style.color = "green";
     } else {
       li.style.color = "red";
@@ -226,6 +246,7 @@ nxtBtn.forEach((button, index) => {
 
     if (checkboxInputs.length > 0) {
       const selected = section.querySelectorAll("[type=checkbox]:checked");
+
       // to make sure no more than 2 checkboxes are selected
       if (selected.length > 2) {
         alert("Max 2 choices");
