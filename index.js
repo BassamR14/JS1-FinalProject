@@ -13,7 +13,6 @@ function welcomeMessage() {
 
   const introMsg = document.createElement("h2");
   introMsg.innerText = `Welcome ${name} and good luck!`;
-  // intro.insertBefore(introMsg, nxtBtn);
   div.insertAdjacentElement("afterend", introMsg);
 }
 
@@ -31,8 +30,6 @@ const questionBorder = document.querySelectorAll(".question p");
 function togglePage() {
   //changes background and text color of page
   body.classList.toggle("dark-mode");
-  //changes button background and text color
-  // submitBtn.classList.toggle("light-mode");
   nameBtn.classList.toggle("light-mode");
   toggleBtn.classList.toggle("light-mode");
   dmIcon.classList.toggle("light-mode");
@@ -112,6 +109,8 @@ function checkAnswers() {
     }
   }
 
+  //checks checkbox selections
+
   //this gives 2 points if both selected answers are correct, and still gives a point if 1 of the answers is wrong.
   // for (i = 6; i < selectedAnswers.length; i++) {
   //   for (x = 0; x < 2; x++) {
@@ -120,8 +119,6 @@ function checkAnswers() {
   //     }
   //   }
   // }
-
-  //checks checkbox selections
 
   for (i = 6; i < selectedAnswers.length; i++) {
     const user = selectedAnswers[i];
@@ -152,20 +149,19 @@ function showResult() {
   const nameH1 = document.querySelector(".scoreboard h1 span");
   const scoreH2 = document.querySelector(".scoreboard h2 span");
   const para = document.querySelector("div p");
-  const image = document.querySelector("div img");
 
   nameH1.innerText = ` ${nameInput.value}`;
   scoreH2.innerText = ` ${score}`;
 
   if (score < 5) {
     para.innerText = "Fail";
-    para.style.color = "red";
+    para.style.color = "#dc3545";
   } else if (score > 4 && score < 8) {
     para.innerText = "Good";
-    para.style.color = "orangered";
+    para.style.color = "#FF8C42";
   } else {
     para.innerText = "Excellent";
-    para.style.color = "green";
+    para.style.color = "#28a745";
   }
 
   //showing user answers + correct answers
@@ -181,10 +177,10 @@ function showResult() {
     inputs.q4.value,
     inputs.q5.value,
     inputs.q6.value,
-    inputs.q7.map((el) => el.value),
-    inputs.q8.map((el) => el.value),
-    inputs.q9.map((el) => el.value),
-    inputs.q10.map((el) => el.value),
+    inputs.q7.map((element) => element.value),
+    inputs.q8.map((element) => element.value),
+    inputs.q9.map((element) => element.value),
+    inputs.q10.map((element) => element.value),
   ];
 
   for (i = 0; i < selectedAnswers.length - 4; i++) {
@@ -196,9 +192,9 @@ function showResult() {
     correctAnswersList.append(li2);
 
     if (selectedAnswers[i] === correctAnswers[i]) {
-      li.style.color = "green";
+      li.style.color = "#28a745";
     } else {
-      li.style.color = "red";
+      li.style.color = "#dc3545";
     }
   }
 
@@ -217,9 +213,9 @@ function showResult() {
     const hasCorrect = user.some((ans) => correct.includes(ans));
 
     if (!hasWrong && hasCorrect) {
-      li.style.color = "green";
+      li.style.color = "#28a745";
     } else {
-      li.style.color = "red";
+      li.style.color = "#dc3545";
     }
   }
 }
@@ -229,13 +225,13 @@ function showResult() {
 
 nxtBtn.forEach((button, index) => {
   button.addEventListener("click", () => {
-    let section = button.closest("section");
-    let radioInputs = section.querySelectorAll("[type=radio]");
-    let checkboxInputs = section.querySelectorAll("[type=checkbox]");
+    let currentSection = button.closest("section");
+    let radioInputs = currentSection.querySelectorAll("[type=radio]");
+    let checkboxInputs = currentSection.querySelectorAll("[type=checkbox]");
 
     // checks what is inside the section, then checks whether it has been selected, if not, stops function and alerts the user, if yes, goes to next page
     if (radioInputs.length > 0) {
-      const selected = section.querySelector("[type=radio]:checked");
+      const selected = currentSection.querySelector("[type=radio]:checked");
 
       if (!selected) {
         alert("Please select an answer");
@@ -244,7 +240,9 @@ nxtBtn.forEach((button, index) => {
     }
 
     if (checkboxInputs.length > 0) {
-      const selected = section.querySelectorAll("[type=checkbox]:checked");
+      const selected = currentSection.querySelectorAll(
+        "[type=checkbox]:checked"
+      );
 
       // to make sure no more than 2 checkboxes are selected
       if (selected.length > 2) {
@@ -267,7 +265,6 @@ nxtBtn.forEach((button, index) => {
       showResult();
     }
 
-    let currentSection = button.closest("section");
     currentSection.classList.add("hidden");
 
     let nextSection = button.closest("section").nextElementSibling;

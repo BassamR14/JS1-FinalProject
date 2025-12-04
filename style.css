@@ -1,6 +1,6 @@
 :root {
   --dark-color: #2e2e2e;
-  --white: #fdf7f2;
+  --white: #ffffff;
 }
 
 body {
@@ -24,8 +24,9 @@ body {
 
 .flex2 {
   display: flex;
-  justify-content: center;
-  gap: 10px;
+  justify-content: space-evenly;
+
+  width: 100vw;
 }
 
 #name {
@@ -132,18 +133,6 @@ label {
 
 .scoreboard p {
   margin: 0 auto;
-}
-
-.scoreboard img {
-  width: 500px;
-}
-
-.show-result {
-  max-width: 50;
-}
-
-.right-border {
-  padding-right: 30px;
 }
 
 /* keep last so display:hidden overwrites all others */
