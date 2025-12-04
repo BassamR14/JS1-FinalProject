@@ -26,7 +26,7 @@ const dmIcon = document.querySelector(".dm-icon");
 const afIcon = document.querySelectorAll(".af-icon");
 const body = document.querySelector("body");
 const toolTip = document.querySelector(".tooltip-text");
-const sections = document.querySelectorAll(".question");
+const questionBorder = document.querySelectorAll(".question p");
 
 function togglePage() {
   //changes background and text color of page
@@ -40,9 +40,8 @@ function togglePage() {
   toolTip.classList.toggle("light-mode");
   nxtBtn.forEach((button) => button.classList.toggle("light-mode"));
 
-  //to change the border color of the sections
-  sections.forEach((section) => {
-    section.classList.toggle("white-border");
+  questionBorder.forEach((question) => {
+    question.classList.toggle("light-mode");
   });
 
   //to get the tooltip text to change when toggling dark mode
@@ -163,7 +162,7 @@ function showResult() {
     para.style.color = "red";
   } else if (score > 4 && score < 8) {
     para.innerText = "Good";
-    para.style.color = "orange";
+    para.style.color = "orangered";
   } else {
     para.innerText = "Excellent";
     para.style.color = "green";
