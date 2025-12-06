@@ -69,7 +69,10 @@ const correctAnswers = [
   ["Vision", "Touch"],
 ];
 
-//To be able to use input values in multiple functions
+//
+//Functions for code that is used multiple times
+
+//put the inputs into an object.
 function getInputs() {
   return {
     q1: document.querySelector("[name=question1]:checked"),
@@ -85,25 +88,44 @@ function getInputs() {
   };
 }
 
+//get the values of the inputs
+function userSelections(obj) {
+  return [
+    obj.q1.value,
+    obj.q2.value,
+    obj.q3.value,
+    obj.q4.value,
+    obj.q5.value,
+    obj.q6.value,
+    obj.q7.map((element) => element.value),
+    obj.q8.map((element) => element.value),
+    obj.q9.map((element) => element.value),
+    obj.q10.map((element) => element.value),
+  ];
+}
+
+//render data in the result page
+function render(userArray, correctArray, list1, list2, index) {
+  let li = document.createElement("li");
+  li.innerText = `${userArray[index]}`;
+  list1.append(li);
+  let li2 = document.createElement("li");
+  li2.innerText = `${correctArray[index]}`;
+  list2.append(li2);
+
+  return li;
+}
+
+//
+// Checks the user selections and gives score
+
 function checkAnswers() {
   const inputs = getInputs();
-
-  const selectedAnswers = [
-    inputs.q1.value,
-    inputs.q2.value,
-    inputs.q3.value,
-    inputs.q4.value,
-    inputs.q5.value,
-    inputs.q6.value,
-    inputs.q7.map((element) => element.value),
-    inputs.q8.map((element) => element.value),
-    inputs.q9.map((element) => element.value),
-    inputs.q10.map((element) => element.value),
-  ];
+  const selectedAnswers = userSelections(inputs);
 
   //checks radio button selections.
 
-  for (i = 0; i < selectedAnswers.length - 4; i++) {
+  for (let i = 0; i < selectedAnswers.length - 4; i++) {
     if (selectedAnswers[i] === correctAnswers[i]) {
       score++;
     }
@@ -120,7 +142,7 @@ function checkAnswers() {
   //   }
   // }
 
-  for (i = 6; i < selectedAnswers.length; i++) {
+  for (let i = 6; i < selectedAnswers.length; i++) {
     const user = selectedAnswers[i];
     const correct = correctAnswers[i];
 
@@ -168,28 +190,17 @@ function showResult() {
   const userList = document.querySelector(".user-answers");
   const correctAnswersList = document.querySelector(".correct-answers");
 
-  const inputs = getQuizInputs();
+  const inputs = getInputs();
+  const selectedAnswers = userSelections(inputs);
 
-  const selectedAnswers = [
-    inputs.q1.value,
-    inputs.q2.value,
-    inputs.q3.value,
-    inputs.q4.value,
-    inputs.q5.value,
-    inputs.q6.value,
-    inputs.q7.map((element) => element.value),
-    inputs.q8.map((element) => element.value),
-    inputs.q9.map((element) => element.value),
-    inputs.q10.map((element) => element.value),
-  ];
-
-  for (i = 0; i < selectedAnswers.length - 4; i++) {
-    let li = document.createElement("li");
-    li.innerText = `${selectedAnswers[i]}`;
-    userList.append(li);
-    let li2 = document.createElement("li");
-    li2.innerText = `${correctAnswers[i]}`;
-    correctAnswersList.append(li2);
+  for (let i = 0; i < selectedAnswers.length - 4; i++) {
+    const li = render(
+      selectedAnswers,
+      correctAnswers,
+      userList,
+      correctAnswersList,
+      i
+    );
 
     if (selectedAnswers[i] === correctAnswers[i]) {
       li.style.color = "#28a745";
@@ -198,13 +209,14 @@ function showResult() {
     }
   }
 
-  for (i = 6; i < selectedAnswers.length; i++) {
-    let li = document.createElement("li");
-    li.innerText = `${selectedAnswers[i]}`;
-    userList.append(li);
-    let li2 = document.createElement("li");
-    li2.innerText = `${correctAnswers[i]}`;
-    correctAnswersList.append(li2);
+  for (let i = 6; i < selectedAnswers.length; i++) {
+    const li = render(
+      selectedAnswers,
+      correctAnswers,
+      userList,
+      correctAnswersList,
+      i
+    );
 
     const user = selectedAnswers[i];
     const correct = correctAnswers[i];
