@@ -4,7 +4,7 @@ const nameBtn = document.querySelector(".submit-name");
 const introLabel = document.querySelector(".intro-label");
 const intro = document.querySelector(".introduction");
 const nxtBtn = document.querySelectorAll(".next-page");
-const div = document.querySelector("div");
+const div = document.querySelector(".intro-div");
 
 function welcomeMessage() {
   const name = nameInput.value;
@@ -28,15 +28,15 @@ const toolTip = document.querySelector(".tooltip-text");
 const questionBorder = document.querySelectorAll(".question p");
 
 function togglePage() {
-  //changes background and text color of page
+  //changes background and text color of page/buttons/icons
   body.classList.toggle("dark-mode");
   nameBtn.classList.toggle("light-mode");
   toggleBtn.classList.toggle("light-mode");
   dmIcon.classList.toggle("light-mode");
-  afIcon.forEach((icon) => icon.classList.toggle("light-mode"));
   toolTip.classList.toggle("light-mode");
-  nxtBtn.forEach((button) => button.classList.toggle("light-mode"));
 
+  afIcon.forEach((icon) => icon.classList.toggle("light-mode"));
+  nxtBtn.forEach((button) => button.classList.toggle("light-mode"));
   questionBorder.forEach((question) => {
     question.classList.toggle("light-mode");
   });
@@ -70,7 +70,7 @@ const correctAnswers = [
 ];
 
 //To be able to use input values in multiple functions
-function getQuizInputs() {
+function getInputs() {
   return {
     q1: document.querySelector("[name=question1]:checked"),
     q2: document.querySelector("[name=question2]:checked"),
@@ -86,7 +86,7 @@ function getQuizInputs() {
 }
 
 function checkAnswers() {
-  const inputs = getQuizInputs();
+  const inputs = getInputs();
 
   const selectedAnswers = [
     inputs.q1.value,
