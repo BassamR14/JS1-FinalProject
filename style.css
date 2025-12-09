@@ -24,9 +24,10 @@ body {
 
 .flex2 {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
 
-  width: 100vw;
+  /* width: 100vw; */
+  /* padding-left: 170px; */
 }
 
 #name {
