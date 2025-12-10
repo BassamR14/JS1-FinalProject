@@ -139,10 +139,6 @@ label {
   border-radius: 15px;
 }
 
-ol li {
-  /* margin: 5px 0; */
-}
-
 ol li span:last-child {
   display: block;
 }
