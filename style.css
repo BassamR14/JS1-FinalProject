@@ -83,10 +83,6 @@ label {
   padding-bottom: 10px;
 }
 
-.question p.light-mode {
-  border-bottom: 1px solid var(--white);
-}
-
 .dark-mode {
   color: var(--white);
   background-color: var(--dark-color);
@@ -183,6 +179,7 @@ label {
 .scoreboard p {
   font-size: 1.8rem;
 }
+
 /* Toggle effects */
 
 .next-page.light-mode {
@@ -210,6 +207,10 @@ label {
 
 section.light-mode {
   background-color: var(--card-dark);
+}
+
+.question p.light-mode {
+  border-bottom: 1px solid var(--white);
 }
 
 /* Hover effects */

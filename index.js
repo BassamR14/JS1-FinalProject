@@ -177,8 +177,6 @@ function showResult() {
 
   scoreH2.innerText = ` ${score}`;
 
-  console.log(nameInput.value);
-
   if (nameInput.value === "") {
     nameH1.classList.add("hidden");
   } else {
@@ -196,9 +194,8 @@ function showResult() {
     para.style.color = "#28a745";
   }
 
-  //showing user answers + correct answers
+  //showing user answers + correct answers if user got a wrong answer
   const userList = document.querySelector(".user-answers");
-  const correctAnswersList = document.querySelector(".correct-answers");
 
   const inputs = getInputs();
   const selectedAnswers = userSelections(inputs);
