@@ -1,6 +1,8 @@
 :root {
   --dark-color: #2e2e2e;
-  --white: #ffffff;
+  --white: #f6f6f6;
+  --card-light: #e9e9e9;
+  --card-dark: #3b3b3b;
 }
 
 body {
@@ -14,6 +16,14 @@ body {
   font-size: 20px;
 }
 
+section {
+  border-radius: 15px;
+  padding: 20px;
+  background-color: var(--card-light);
+  /* min-width: 400px; */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
 .flex {
   display: flex;
   flex-direction: column;
@@ -25,6 +35,7 @@ body {
 .flex2 {
   display: flex;
   justify-content: center;
+  gap: 20px;
 
   /* width: 100vw; */
   /* padding-left: 170px; */
@@ -128,9 +139,17 @@ label {
   border-radius: 15px;
 }
 
-.scoreboard {
-  width: 100%;
+ol li {
+  /* margin: 5px 0; */
 }
+
+ol li span:last-child {
+  display: block;
+}
+
+/* .scoreboard {
+  width: 100%;
+} */
 
 .scoreboard p {
   margin: 0 auto;
@@ -153,13 +172,18 @@ label {
   font-size: 1.2rem;
 }
 
+.scoreboard {
+  margin: 0 auto;
+}
+
 .scoreboard p {
-  font-size: 1.6rem;
+  font-size: 1.8rem;
 }
 /* Toggle effects */
 
 .next-page.light-mode {
   background-color: var(--white);
+  color: var(--dark-color);
 }
 
 .submit-name.light-mode {
@@ -178,6 +202,10 @@ label {
 .tooltip-text.light-mode {
   color: var(--dark-color);
   background-color: var(--white);
+}
+
+section.light-mode {
+  background-color: var(--card-dark);
 }
 
 /* Hover effects */

@@ -26,6 +26,7 @@ const afIcon = document.querySelectorAll(".af-icon");
 const body = document.querySelector("body");
 const toolTip = document.querySelector(".tooltip-text");
 const questionBorder = document.querySelectorAll(".question p");
+const sections = document.querySelectorAll("section");
 
 function togglePage() {
   //changes background and text color of page/buttons/icons
@@ -40,6 +41,7 @@ function togglePage() {
   questionBorder.forEach((question) => {
     question.classList.toggle("light-mode");
   });
+  sections.forEach((section) => section.classList.toggle("light-mode"));
 
   //to get the tooltip text to change when toggling dark mode
   if (body.classList.contains("dark-mode")) {
@@ -105,15 +107,15 @@ function userSelections(obj) {
 }
 
 //render data in the result page
-function render(userArray, correctArray, list1, list2, index) {
+function render(userArray, list, index) {
   let li = document.createElement("li");
-  li.innerText = `${userArray[index]}`;
-  list1.append(li);
-  let li2 = document.createElement("li");
-  li2.innerText = `${correctArray[index]}`;
-  list2.append(li2);
+  let span1 = document.createElement("span");
+  let span2 = document.createElement("span");
+  span1.innerText = `${userArray[index]}`;
+  li.append(span1, span2);
+  list.append(li);
 
-  return li;
+  return { span1, span2 };
 }
 
 //
@@ -168,12 +170,20 @@ const resultPage = document.querySelector(".result-page");
 
 function showResult() {
   //scoreboard
-  const nameH1 = document.querySelector(".scoreboard h1 span");
+  const nameH1 = document.querySelector(".scoreboard h1");
+  const nameH1Span = document.querySelector(".scoreboard h1 span");
   const scoreH2 = document.querySelector(".scoreboard h2 span");
   const para = document.querySelector("div p");
 
-  nameH1.innerText = ` ${nameInput.value}`;
   scoreH2.innerText = ` ${score}`;
+
+  console.log(nameInput.value);
+
+  if (nameInput.value === "") {
+    nameH1.classList.add("hidden");
+  } else {
+    nameH1Span.innerText = ` ${nameInput.value}`;
+  }
 
   if (score < 5) {
     para.innerText = "Fail";
@@ -194,29 +204,18 @@ function showResult() {
   const selectedAnswers = userSelections(inputs);
 
   for (let i = 0; i < selectedAnswers.length - 4; i++) {
-    const li = render(
-      selectedAnswers,
-      correctAnswers,
-      userList,
-      correctAnswersList,
-      i
-    );
+    const { span1, span2 } = render(selectedAnswers, userList, i);
 
     if (selectedAnswers[i] === correctAnswers[i]) {
-      li.style.color = "#28a745";
+      span1.style.color = "#28a745";
     } else {
-      li.style.color = "#dc3545";
+      span1.style.color = "#dc3545";
+      span2.innerText = `Correct answer: ${correctAnswers[i]}`;
     }
   }
 
   for (let i = 6; i < selectedAnswers.length; i++) {
-    const li = render(
-      selectedAnswers,
-      correctAnswers,
-      userList,
-      correctAnswersList,
-      i
-    );
+    const { span1, span2 } = render(selectedAnswers, userList, i);
 
     const user = selectedAnswers[i];
     const correct = correctAnswers[i];
@@ -225,9 +224,10 @@ function showResult() {
     const hasCorrect = user.some((ans) => correct.includes(ans));
 
     if (!hasWrong && hasCorrect) {
-      li.style.color = "#28a745";
+      span1.style.color = "#28a745";
     } else {
-      li.style.color = "#dc3545";
+      span1.style.color = "#dc3545";
+      span2.innerText = `Correct answers: ${correctAnswers[i]}`;
     }
   }
 }
