@@ -119,17 +119,24 @@ function render(userArray, list, index) {
 }
 
 //
-// Checks the user selections and gives score
+// Checks the user selections and gives score, + rendering user answers + correct answer if user answer is wrong.
 
 function checkAnswers() {
   const inputs = getInputs();
   const selectedAnswers = userSelections(inputs);
+  const userList = document.querySelector(".user-answers");
 
   //checks radio button selections.
 
   for (let i = 0; i < selectedAnswers.length - 4; i++) {
+    const { span1, span2 } = render(selectedAnswers, userList, i);
+
     if (selectedAnswers[i] === correctAnswers[i]) {
       score++;
+      span1.style.color = "#28a745";
+    } else {
+      span1.style.color = "#dc3545";
+      span2.innerText = `Correct answer: ${correctAnswers[i]}`;
     }
   }
 
@@ -147,18 +154,22 @@ function checkAnswers() {
   for (let i = 6; i < selectedAnswers.length; i++) {
     const user = selectedAnswers[i];
     const correct = correctAnswers[i];
+    const { span1, span2 } = render(selectedAnswers, userList, i);
 
     const hasWrong = user.some((ans) => !correct.includes(ans));
     const hasCorrect = user.some((ans) => correct.includes(ans));
 
     // if the selected answer/s contains 1 wrong, continue to the next iteration of the loop.
     if (hasWrong) {
+      span1.style.color = "#dc3545";
+      span2.innerText = `Correct answers: ${correctAnswers[i]}`;
       continue;
     }
 
     // if at least 1 answer is correct, give a score, we know that the 2nd answer is also correct because of hasWrong.
     if (hasCorrect) {
       score++;
+      span1.style.color = "#28a745";
     }
   }
 }
@@ -192,40 +203,6 @@ function showResult() {
   } else {
     para.innerText = "Excellent";
     para.style.color = "#28a745";
-  }
-
-  //showing user answers + correct answers if user got a wrong answer
-  const userList = document.querySelector(".user-answers");
-
-  const inputs = getInputs();
-  const selectedAnswers = userSelections(inputs);
-
-  for (let i = 0; i < selectedAnswers.length - 4; i++) {
-    const { span1, span2 } = render(selectedAnswers, userList, i);
-
-    if (selectedAnswers[i] === correctAnswers[i]) {
-      span1.style.color = "#28a745";
-    } else {
-      span1.style.color = "#dc3545";
-      span2.innerText = `Correct answer: ${correctAnswers[i]}`;
-    }
-  }
-
-  for (let i = 6; i < selectedAnswers.length; i++) {
-    const { span1, span2 } = render(selectedAnswers, userList, i);
-
-    const user = selectedAnswers[i];
-    const correct = correctAnswers[i];
-
-    const hasWrong = user.some((ans) => !correct.includes(ans));
-    const hasCorrect = user.some((ans) => correct.includes(ans));
-
-    if (!hasWrong && hasCorrect) {
-      span1.style.color = "#28a745";
-    } else {
-      span1.style.color = "#dc3545";
-      span2.innerText = `Correct answers: ${correctAnswers[i]}`;
-    }
   }
 }
 
